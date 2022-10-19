@@ -3,50 +3,44 @@ import { TextField, Button } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
 
 const Form = ({ handleClose, defaultValues }) => {
-  const { handleSubmit, control, reset } = useForm({
-    defaultValues: { email: "", firstname: "", lastname: "", password: "" }
-  });
-  const [fields, setFields] = useState([
-    {
-      title: "First Name",
-      name: "firstname",
-      value: "",
-      rules: "First name required"
-    },
-    {
-      title: "Last Name",
-      name: "lastname",
-      value: "",
-      rules: "Last name required"
-    },
-    {
-      title: "Email",
-      name: "email",
-      value: "",
-      rules: "Email required"
-    },
-    {
-      title: "Password",
-      name: "password",
-      value: "",
-      rules: "Password required"
-    }
-  ]);
+  const { handleSubmit, control } = useForm();
+  const [fields, setFields] = useState(
+    defaultValues ?? [
+      {
+        title: "First Name",
+        name: "firstname",
+        value: "",
+        rules: "First name required"
+      },
+      {
+        title: "Last Name",
+        name: "lastname",
+        value: "",
+        rules: "Last name required"
+      },
+      {
+        title: "Email",
+        name: "email",
+        value: "",
+        rules: "Email required"
+      },
+      {
+        title: "Password",
+        name: "password",
+        value: "",
+        rules: "Password required"
+      }
+    ]
+  );
 
   const onSubmit = (data) => {
     console.log(data);
   };
 
-  useEffect(() => {
-    console.log("render values", fields);
-    setFields(defaultValues);
-    reset(defaultValues);
-  }, [fields, reset]);
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {fields.map((field) => (
-        <>
+        <div key={field.name + "_div"}>
           <span key={field.name + "_span"}>
             {field.title}:{field.value}
           </span>
@@ -67,7 +61,7 @@ const Form = ({ handleClose, defaultValues }) => {
             )}
             rules={{ required: field.rules }}
           />
-        </>
+        </div>
       ))}
       <div>
         <Button variant="contained" onClick={handleClose}>
