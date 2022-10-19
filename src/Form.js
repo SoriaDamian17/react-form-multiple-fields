@@ -1,40 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField, Button } from "@mui/material";
 import { Controller } from "react-hook-form";
 
 const Form = ({ handleClose, defaultValues, handleSubmit, control }) => {
-  const [fields, setFields] = useState(
-    defaultValues ?? [
-      {
-        title: "First Name",
-        name: "firstname",
-        value: "",
-        rules: "First name required"
-      },
-      {
-        title: "Last Name",
-        name: "lastname",
-        value: "",
-        rules: "Last name required"
-      },
-      {
-        title: "Email",
-        name: "email",
-        value: "",
-        rules: "Email required"
-      },
-      {
-        title: "Password",
-        name: "password",
-        value: "",
-        rules: "Password required"
-      }
-    ]
-  );
+  const [fields, setFields] = useState([
+    {
+      title: "First Name",
+      name: "firstname",
+      value: "",
+      rules: "First name required"
+    },
+    {
+      title: "Last Name",
+      name: "lastname",
+      value: "",
+      rules: "Last name required"
+    },
+    {
+      title: "Email",
+      name: "email",
+      value: "",
+      rules: "Email required"
+    },
+    {
+      title: "Password",
+      name: "password",
+      value: "",
+      rules: "Password required"
+    }
+  ]);
 
   const onSubmit = (data) => {
     console.log(data);
   };
+
+  useEffect(() => {
+    if (defaultValues.lenght) setFields(defaultValues);
+  }, [fields]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
