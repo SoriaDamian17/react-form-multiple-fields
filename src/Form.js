@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
-import { useForm, Controller } from "react-hook-form";
+import { Controller } from "react-hook-form";
 
-const Form = ({ handleClose, defaultValues }) => {
-  const { handleSubmit, control } = useForm();
+const Form = ({ handleClose, defaultValues, handleSubmit, control }) => {
   const [fields, setFields] = useState(
     defaultValues ?? [
       {

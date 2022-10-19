@@ -1,7 +1,9 @@
+import { useForm } from "react-hook-form";
 import Form from "./Form";
 import "./styles.css";
 
 export default function App() {
+  const { handleSubmit, control } = useForm();
   const defaultValues = [
     {
       title: "First Name",
@@ -32,7 +34,11 @@ export default function App() {
     <div className="App">
       <h1>Hello CodeSandbox</h1>
       <h2>Start editing to see some magic happen!</h2>
-      <Form defaultValues={defaultValues} />
+      <Form
+        defaultValues={defaultValues}
+        control={control}
+        handleSubmit={handleSubmit}
+      />
     </div>
   );
 }
